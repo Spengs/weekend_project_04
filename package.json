@@ -1,0 +1,25 @@
+{
+  "name": "weekend_project_04",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node server/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Spengs/weekend_project_04.git"
+  },
+  "author": "Jotto465@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Spengs/weekend_project_04/issues"
+  },
+  "homepage": "https://github.com/Spengs/weekend_project_04#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "pg": "^6.1.0"
+  }
+}
