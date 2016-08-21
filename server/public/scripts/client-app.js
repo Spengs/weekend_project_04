@@ -1,8 +1,10 @@
 $(document).ready(function(){
   getTasks();
 
-
   $('#create-task').on('click', 'button', createTask);
+  $('#task-container').on('click', '.complete', completeTask);
+  $('#task-container').on('click', '.delete', deleteTask);
+
 });
 
 
@@ -58,5 +60,26 @@ function createTask(){
     error: function(response) {
       console.log('POST did not work');
     },
+  });
+}
+
+
+function completeTask(){
+  console.log('complete button works');
+}
+
+function deleteTask(){
+  var taskId = $(this).parent().data('taskId');
+  $.ajax({
+    type: 'DELETE',
+    url: '/tasks/' + taskId,
+    success: function(){
+      console.log('DELETE success');
+      $('#task-container').empty();
+      getTasks();
+    },
+    error: function(){
+      console.log('DELETE failed');
+    }
   });
 }
