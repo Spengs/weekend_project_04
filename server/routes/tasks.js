@@ -72,7 +72,31 @@ router.delete('/:id', function(req, res){
   });
 });
 
+router.put('/:id', function(req, res){
+  var id = req.params.id;
+  var task = req.body;
+  console.log('body', req.body);
 
+  pg.connect(connectionString, function(err, client, done){
+    if(err){
+      res.sendStatus(500);
+    }
+    console.log(task.completed);
+      client.query('UPDATE tasks ' +
+                  'SET completed = TRUE ' +
+                  'WHERE id = $1',
+                  [id],
+                  function(err, result){
+                    done();
+                    if(err){
+                      console.log('err', err);
+                    }else{
+                      res.sendStatus(200);
+                      console.log('success status');
+                    }
+                  })
+    });
+  });
 
 
 

@@ -66,7 +66,28 @@ function createTask(){
 
 function completeTask(){
   console.log('complete button works');
-}
+  var task = {};
+  var inputs = ($(this).parent().children().serializeArray());
+  $.each(inputs, function(i, field){
+    task[field.name] = field.value;
+  });
+  console.log("task we are putting", task);
+  var taskId = ($(this).parent().data('taskId'));
+
+  $.ajax({
+    type: 'PUT',
+    url: '/tasks/' + taskId,
+    data: taskId,
+    success: function(){
+      $('#task-container').empty();
+      getTasks();
+    },
+    error: function(){
+      console.log("error PUT /tasks/" + taskId);
+    },
+  });
+};
+
 
 function deleteTask(){
   var taskId = $(this).parent().data('taskId');
