@@ -1,6 +1,7 @@
 $(document).ready(function(){
   getTasks();
 
+
   $('#create-task').on('click', 'button', createTask);
   $('#task-container').on('click', '.complete', completeTask);
   $('#task-container').on('click', '.delete', deleteTask);
@@ -13,20 +14,24 @@ function getTasks(){
     type: 'GET',
     url: '/tasks',
     success: function(tasks){
-      console.log('GET tasks returns:', tasks);
-      tasks.forEach(function(task){
-        var $el = $('<div></div>');
-            $el.append(task.task_name);
-            $el.append(task.task_created_date);
-            $el.append(task.task_due_date);
-            $el.append(task.task_info);
-
-            $el.data('taskId', task.id);
-            $el.append('<button class="complete">Complete</button>');
-            $el.append('<button class="delete">Delete</button>');
-
-        $('#task-container').append($el);
-      });
+      appendTasks(tasks);
+      // console.log('GET tasks returns:', tasks);
+      // tasks.forEach(function(task){
+      //   var $el = $('<div class="open"></div>');
+      //   if(task.completed == true) {
+      //     $el = $('<div class="done"></div>')
+      //   }
+      //       $el.append(task.task_name);
+      //       $el.append(task.task_created_date);
+      //       $el.append(task.task_due_date);
+      //       $el.append(task.task_info);
+      //
+      //       $el.data('taskId', task.id);
+      //       $el.append('<button class="complete">Complete</button>');
+      //       $el.append('<button class="delete">Delete</button>');
+      //
+      //   $('#task-container').append($el);
+      // });
     },
     error: function(response){
       console.log('GET /tasks failed');
@@ -62,7 +67,8 @@ function createTask(){
 
 function completeTask(){
   console.log('complete button works');
-  $(this).parent().css('background-color', 'green');
+  $(this).parent().css('background-color', 'lightgreen');
+  // $(this).parent().toggleClass('closed');
   var task = {};
   var inputs = ($(this).parent().children().serializeArray());
   $.each(inputs, function(i, field){
@@ -76,8 +82,8 @@ function completeTask(){
     url: '/tasks/' + taskId,
     data: taskId,
     success: function(){
-      // $('#task-container').empty();
-      // getTasks();
+      $('#task-container').empty();
+      getTasks();
 
     },
     error: function(){
@@ -101,4 +107,26 @@ function deleteTask(){
       console.log('DELETE failed');
     }
   });
+}
+
+
+function appendTasks(tasks){
+  console.log('GET tasks returns:', tasks);
+  tasks.forEach(function(task){
+    var $el = $('<div></div>');
+    if(task.completed == true) {
+      $el = $('<div class="done"></div>')
+    }
+        $el.append(task.task_name);
+        $el.append(task.task_created_date);
+        $el.append(task.task_due_date);
+        $el.append(task.task_info);
+
+        $el.data('taskId', task.id);
+        $el.append('<button class="complete">Complete</button>');
+        $el.append('<button class="delete">Delete</button>');
+
+    $('#task-container').append($el);
+  });
+
 }

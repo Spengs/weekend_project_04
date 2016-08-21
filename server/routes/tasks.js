@@ -9,7 +9,7 @@ router.get('/', function(req, res){
       res.sendStatus(500);
     }
 
-    client.query('SELECT * FROM tasks', function(err, result){
+    client.query('SELECT * FROM tasks GROUP BY id ORDER BY completed ASC, tasks.id ASC', function(err, result){
       done();
 
       if(err){

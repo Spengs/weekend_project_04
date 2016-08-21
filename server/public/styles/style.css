@@ -6,6 +6,6 @@ h1 {
   margin: 20px;
 }
 
-/*#task_info {
-  height: 100px;
-}*/
+.done {
+  background-color: lightgreen;
+}
