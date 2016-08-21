@@ -18,7 +18,7 @@ function getTasks(){
         var taskProperties = ['task_name', 'task_created_date', 'task_due_date', 'task_info']
 
         taskProperties.forEach(function(property){
-          var $input = $('<input type="text" id="' + property + '"name="' +property + '" />';)
+          var $input = $('<input type="text" id="' + property + '"name="' +property + '" />');
           $input.val(task[property]);
           $el.append($input);
         });
@@ -58,7 +58,5 @@ function createTask(){
     error: function(response) {
       console.log('POST did not work');
     },
-  });  
+  });
 }
-
-function
