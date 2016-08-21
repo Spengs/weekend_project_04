@@ -16,18 +16,14 @@ function getTasks(){
       console.log('GET tasks returns:', tasks);
       tasks.forEach(function(task){
         var $el = $('<div></div>');
+            $el.append(task.task_name);
+            $el.append(task.task_created_date);
+            $el.append(task.task_due_date);
+            $el.append(task.task_info);
 
-        var taskProperties = ['task_name', 'task_created_date', 'task_due_date', 'task_info']
-
-        taskProperties.forEach(function(property){
-          var $input = $('<input type="text" id="' + property + '"name="' +property + '" />');
-          $input.val(task[property]);
-          $el.append($input);
-        });
-
-        $el.data('taskId', task.id);
-        $el.append('<button class="complete">Complete</button>');
-        $el.append('<button class="delete">Delete</button>');
+            $el.data('taskId', task.id);
+            $el.append('<button class="complete">Complete</button>');
+            $el.append('<button class="delete">Delete</button>');
 
         $('#task-container').append($el);
       });
@@ -66,6 +62,7 @@ function createTask(){
 
 function completeTask(){
   console.log('complete button works');
+  $(this).parent().css('background-color', 'green');
   var task = {};
   var inputs = ($(this).parent().children().serializeArray());
   $.each(inputs, function(i, field){
@@ -79,8 +76,9 @@ function completeTask(){
     url: '/tasks/' + taskId,
     data: taskId,
     success: function(){
-      $('#task-container').empty();
-      getTasks();
+      // $('#task-container').empty();
+      // getTasks();
+
     },
     error: function(){
       console.log("error PUT /tasks/" + taskId);
