@@ -66,9 +66,8 @@ function createTask(){
 
 
 function completeTask(){
-  console.log('complete button works');
   $(this).parent().css('background-color', 'lightgreen');
-  // $(this).parent().toggleClass('closed');
+
   var task = {};
   var inputs = ($(this).parent().children().serializeArray());
   $.each(inputs, function(i, field){
@@ -95,32 +94,36 @@ function completeTask(){
 
 function deleteTask(){
   var taskId = $(this).parent().data('taskId');
-  $.ajax({
-    type: 'DELETE',
-    url: '/tasks/' + taskId,
-    success: function(){
-      console.log('DELETE success');
-      $('#task-container').empty();
-      getTasks();
-    },
-    error: function(){
-      console.log('DELETE failed');
+  var foo = confirm('Are you sure?');
+
+  if(foo == true){
+    $.ajax({
+      type: 'DELETE',
+      url: '/tasks/' + taskId,
+      success: function(){
+        console.log('DELETE success');
+        $('#task-container').empty();
+        getTasks();
+      },
+      error: function(){
+        console.log('DELETE failed');
     }
   });
+ }
 }
 
 
 function appendTasks(tasks){
   console.log('GET tasks returns:', tasks);
   tasks.forEach(function(task){
-    var $el = $('<div></div>');
+    var $el = $('<div class="open"></div>');
     if(task.completed == true) {
       $el = $('<div class="done"></div>')
     }
-        $el.append(task.task_name);
-        $el.append(task.task_created_date);
-        $el.append(task.task_due_date);
-        $el.append(task.task_info);
+        $el.append('<strong>' + '<u>' + task.task_name + '</u>' + '</strong>' + '<br />');
+        $el.append(task.task_created_date + '<br />');
+        $el.append(task.task_due_date + '<br />');
+        $el.append(task.task_info + '<br />');
 
         $el.data('taskId', task.id);
         $el.append('<button class="complete">Complete</button>');

@@ -1,11 +1,48 @@
 h1 {
   color: blue;
+  text-align: center;
 }
 
+h2 {
+  text-align: center;
+  text-decoration: underline;
+}
 .form-group {
   margin: 20px;
 }
 
+#create-task {
+  display: block;
+  text-align: center;
+}
+
+#task-form {
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+
 .done {
   background-color: lightgreen;
+  margin: 20px;
+  padding: 20px;
+  width: 200px;
+  display: inline-block;
+  word-wrap: break-word;
+	border-radius: 15px;
+	box-shadow: 0 10px 10px rgba(0, 0, 0, 0.75);
+  font-family: "Trebuchet MS";
+}
+
+.open {
+  background-color: lightgray;
+  margin: 20px;
+  padding: 20px;
+  width: 200px;
+  display: inline-block;
+	border-radius: 15px;
+	box-shadow: 0 10px 10px rgba(0, 0, 0, 0.75);
+  font-family: "Trebuchet MS";
 }
