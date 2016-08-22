@@ -66,7 +66,6 @@ function createTask(){
 
 
 function completeTask(){
-  $(this).parent().css('background-color', 'lightgreen');
 
   var task = {};
   var inputs = ($(this).parent().children().serializeArray());
@@ -120,9 +119,14 @@ function appendTasks(tasks){
     if(task.completed == true) {
       $el = $('<div class="done"></div>')
     }
+
+        console.log(task.task_due_date);
+        toString(task.task_due_date);
+        console.log(task.task_due_date);
         $el.append('<strong>' + '<u>' + task.task_name + '</u>' + '</strong>' + '<br />');
         // $el.append(task.task_created_date + '<br />');
         // $el.append(task.task_due_date + '<br />');
+        // dates don't display because of the gross time section
         $el.append(task.task_info + '<br />');
 
         $el.data('taskId', task.id);
