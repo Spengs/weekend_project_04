@@ -121,8 +121,8 @@ function appendTasks(tasks){
       $el = $('<div class="done"></div>')
     }
         $el.append('<strong>' + '<u>' + task.task_name + '</u>' + '</strong>' + '<br />');
-        $el.append(task.task_created_date + '<br />');
-        $el.append(task.task_due_date + '<br />');
+        // $el.append(task.task_created_date + '<br />');
+        // $el.append(task.task_due_date + '<br />');
         $el.append(task.task_info + '<br />');
 
         $el.data('taskId', task.id);
